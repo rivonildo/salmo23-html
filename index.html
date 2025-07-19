@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salmos Sagrados - 23 e 121</title>
+  <title>Salmos Sagrados - 23, 121 e 91</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #2c6e49;
-      --secondary: #4c956c;
-      --accent: #d68c45;
+      --salmo23-primary: #2c6e49;
+      --salmo23-accent: #d68c45;
+      --salmo121-primary: #1d3557;
+      --salmo121-accent: #e63946;
+      --salmo91-primary: #4a7c59;
+      --salmo91-accent: #d8a47f;
       --light: #fefee3;
       --dark: #1d3557;
       --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -40,7 +43,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path d="M20,20 Q50,5 80,20 T100,50 Q85,80 50,100 T0,50 Q15,20 50,0 T100,20" fill="%234c956c22"/></svg>');
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path d="M20,20 Q50,5 80,20 T100,50 Q85,80 50,100 T0,50 Q15,20 50,0 T100,20" fill="%232c6e4922"/></svg>');
       background-size: 150px;
       opacity: 0.1;
       z-index: -1;
@@ -62,19 +65,19 @@
 
     .logo-icon {
       font-size: 2.5rem;
-      color: var(--primary);
+      color: var(--salmo23-primary);
       animation: pulse 2s infinite;
     }
 
     h1 {
       font-size: 2.8rem;
-      color: var(--primary);
+      color: var(--salmo23-primary);
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .subtitle {
       font-size: 1.2rem;
-      color: var(--accent);
+      color: var(--salmo23-accent);
       font-weight: 500;
       max-width: 600px;
       margin: 0 auto;
@@ -90,7 +93,7 @@
 
     .tab-btn {
       padding: 12px 30px;
-      background: var(--primary);
+      background: var(--salmo23-primary);
       color: white;
       border: none;
       border-radius: 50px;
@@ -104,15 +107,34 @@
     }
 
     .tab-btn:hover {
-      background: var(--accent);
       transform: translateY(-3px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .tab-btn.active {
-      background: var(--accent);
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #salmo23-btn {
+      background: var(--salmo23-primary);
+    }
+    #salmo23-btn.active, #salmo23-btn:hover {
+      background: var(--salmo23-accent);
+    }
+
+    #salmo121-btn {
+      background: var(--salmo121-primary);
+    }
+    #salmo121-btn.active, #salmo121-btn:hover {
+      background: var(--salmo121-accent);
+    }
+
+    #salmo91-btn {
+      background: var(--salmo91-primary);
+    }
+    #salmo91-btn.active, #salmo91-btn:hover {
+      background: var(--salmo91-accent);
     }
 
     .content-container {
@@ -145,7 +167,6 @@
 
     .psalm-title {
       font-size: 2.2rem;
-      color: var(--primary);
       text-align: center;
       margin-bottom: 25px;
       position: relative;
@@ -160,26 +181,67 @@
       transform: translateX(-50%);
       width: 100px;
       height: 4px;
-      background: var(--accent);
       border-radius: 2px;
+    }
+
+    #salmo23-content .psalm-title {
+      color: var(--salmo23-primary);
+    }
+    #salmo23-content .psalm-title::after {
+      background: var(--salmo23-accent);
+    }
+
+    #salmo121-content .psalm-title {
+      color: var(--salmo121-primary);
+    }
+    #salmo121-content .psalm-title::after {
+      background: var(--salmo121-accent);
+    }
+
+    #salmo91-content .psalm-title {
+      color: var(--salmo91-primary);
+    }
+    #salmo91-content .psalm-title::after {
+      background: var(--salmo91-accent);
     }
 
     .verse {
       font-size: 1.3rem;
       line-height: 1.9;
-      color: var(--dark);
       margin-bottom: 18px;
       padding: 15px;
       border-radius: 12px;
-      background: rgba(76, 149, 108, 0.05);
       transition: var(--transition);
       position: relative;
       padding-left: 60px;
     }
 
     .verse:hover {
-      background: rgba(76, 149, 108, 0.1);
       transform: translateX(5px);
+    }
+
+    #salmo23-content .verse {
+      color: var(--salmo23-primary);
+      background: rgba(44, 110, 73, 0.05);
+    }
+    #salmo23-content .verse:hover {
+      background: rgba(44, 110, 73, 0.1);
+    }
+
+    #salmo121-content .verse {
+      color: var(--salmo121-primary);
+      background: rgba(29, 53, 87, 0.05);
+    }
+    #salmo121-content .verse:hover {
+      background: rgba(29, 53, 87, 0.1);
+    }
+
+    #salmo91-content .verse {
+      color: var(--salmo91-primary);
+      background: rgba(74, 124, 89, 0.05);
+    }
+    #salmo91-content .verse:hover {
+      background: rgba(74, 124, 89, 0.1);
     }
 
     .verse-number {
@@ -187,21 +249,46 @@
       left: 15px;
       top: 15px;
       font-weight: bold;
-      color: var(--accent);
-      background: rgba(214, 140, 69, 0.15);
       width: 35px;
       height: 35px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    #salmo23-content .verse-number {
+      color: var(--salmo23-accent);
+      background: rgba(214, 140, 69, 0.15);
+    }
+
+    #salmo121-content .verse-number {
+      color: var(--salmo121-accent);
+      background: rgba(230, 57, 70, 0.15);
+    }
+
+    #salmo91-content .verse-number {
+      color: var(--salmo91-accent);
+      background: rgba(216, 164, 127, 0.2);
     }
 
     .bible-ref {
       font-style: italic;
-      color: var(--secondary);
       text-align: center;
       margin: 25px 0;
+    }
+
+    #salmo23-content .bible-ref {
+      color: var(--salmo23-primary);
+    }
+
+    #salmo121-content .bible-ref {
+      color: var(--salmo121-primary);
+    }
+
+    #salmo91-content .bible-ref {
+      color: var(--salmo91-primary);
     }
 
     .iframe-container {
@@ -267,7 +354,6 @@
       .verse-number {
         width: 30px;
         height: 30px;
-        font-size: 0.9rem;
       }
       
       .tab-btn {
@@ -306,11 +392,14 @@
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" data-tab="salmo23">
+    <button id="salmo23-btn" class="tab-btn active" data-tab="salmo23">
       <i class="fas fa-verse"></i> Salmo 23
     </button>
-    <button class="tab-btn" data-tab="salmo121">
+    <button id="salmo121-btn" class="tab-btn" data-tab="salmo121">
       <i class="fas fa-mountain"></i> Salmo 121
+    </button>
+    <button id="salmo91-btn" class="tab-btn" data-tab="salmo91">
+      <i class="fas fa-shield-alt"></i> Salmo 91
     </button>
   </div>
 
@@ -349,7 +438,7 @@
         <span class="verse-number">6</span>
         Certamente que a bondade e a misericórdia me seguirão todos os dias da minha vida; e habitarei na casa do Senhor para todo o sempre.
       </div>
-      
+     
     </div>
     
     <!-- Salmo 121 -->
@@ -395,6 +484,93 @@
       <div class="verse">
         <span class="verse-number">8</span>
         O Senhor guardará a tua saída e a tua entrada, desde agora e para sempre.
+      </div>
+      
+    </div>
+    
+    <!-- Salmo 91 -->
+    <div class="content" id="salmo91-content">
+      <h2 class="psalm-title">Salmo 91</h2>
+      <p class="bible-ref">Aquele que habita no esconderijo do Altíssimo</p>
+      
+      <div class="verse">
+        <span class="verse-number">1</span>
+        Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">2</span>
+        Direi do Senhor: Ele é o meu refúgio e a minha fortaleza, o meu Deus, em quem confio.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">3</span>
+        Porque ele te livrará do laço do passarinheiro, e da peste perniciosa.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">4</span>
+        Ele te cobrirá com as suas penas, e debaixo das suas asas te confiarás; a sua verdade será o teu escudo e broquel.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">5</span>
+        Não terás medo do terror de noite nem da seta que voa de dia.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">6</span>
+        Nem da peste que anda na escuridão, nem da mortandade que assola ao meio-dia.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">7</span>
+        Mil cairão ao teu lado, e dez mil à tua direita, mas não chegará a ti.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">8</span>
+        Somente com os teus olhos contemplarás, e verás a recompensa dos ímpios.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">9</span>
+        Porque tu, ó Senhor, és o meu refúgio. No Altíssimo fizeste a tua habitação.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">10</span>
+        Nenhum mal te sucederá, nem praga alguma chegará à tua tenda.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">11</span>
+        Porque aos seus anjos dará ordem a teu respeito, para te guardarem em todos os teus caminhos.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">12</span>
+        Eles te sustentarão nas suas mãos, para que não tropeces com o teu pé em pedra.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">13</span>
+        Pisarás o leão e a cobra; calcarás aos pés o filho do leão e a serpente.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">14</span>
+        Porquanto tão encarecidamente me amou, também eu o livrarei; pô-lo-ei em retiro alto, porque conheceu o meu nome.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">15</span>
+        Ele me invocará, e eu lhe responderei; estarei com ele na angústia; dela o retirarei, e o glorificarei.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">16</span>
+        Fartá-lo-ei com longura de dias, e lhe mostrarei a minha salvação.
       </div>
       
     </div>

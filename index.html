@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salmo 23 - Bíblia Sagrada</title>
+  <title>Salmos Sagrados - 23 e 121</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #2c6e49;
+      --secondary: #4c956c;
+      --accent: #d68c45;
+      --light: #fefee3;
+      --dark: #1d3557;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -14,102 +24,435 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
-      color: #1a237e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: var(--dark);
       min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      background-color: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      max-width: 900px;
-      width: 100%;
-      padding: 40px 30px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path d="M20,20 Q50,5 80,20 T100,50 Q85,80 50,100 T0,50 Q15,20 50,0 T100,20" fill="%234c956c22"/></svg>');
+      background-size: 150px;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .logo-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      animation: pulse 2s infinite;
     }
 
     h1 {
       font-size: 2.8rem;
-      text-align: center;
-      color: #2e7d32;
-      margin-bottom: 8px;
+      color: var(--primary);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
+    .subtitle {
       font-size: 1.2rem;
-      text-align: center;
-      color: #5d4037;
-      font-weight: 400;
-      margin-bottom: 24px;
+      color: var(--accent);
+      font-weight: 500;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    p {
-      font-size: 1.25rem;
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 25px 0;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 30px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-btn:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .content-container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: var(--transition);
+    }
+
+    .content-container:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .content {
+      padding: 40px;
+      min-height: 500px;
+      display: none;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .psalm-title {
+      font-size: 2.2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .psalm-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .verse {
+      font-size: 1.3rem;
       line-height: 1.9;
-      color: #1a237e;
-      text-align: justify;
+      color: var(--dark);
+      margin-bottom: 18px;
+      padding: 15px;
+      border-radius: 12px;
+      background: rgba(76, 149, 108, 0.05);
+      transition: var(--transition);
+      position: relative;
+      padding-left: 60px;
+    }
+
+    .verse:hover {
+      background: rgba(76, 149, 108, 0.1);
+      transform: translateX(5px);
+    }
+
+    .verse-number {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      font-weight: bold;
+      color: var(--accent);
+      background: rgba(214, 140, 69, 0.15);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bible-ref {
+      font-style: italic;
+      color: var(--secondary);
+      text-align: center;
+      margin: 25px 0;
+    }
+
+    .iframe-container {
+      margin-top: 30px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
     iframe {
       width: 100%;
-      height: 400px;
+      height: 300px;
       border: none;
-      border-radius: 12px;
-      margin-top: 10px;
-      box-shadow: 0 0 10px rgba(0, 128, 0, 0.2);
+      display: block;
     }
 
-    footer {
-      margin-top: 30px;
+    .footer {
       text-align: center;
-      font-style: italic;
+      margin-top: 30px;
+      padding: 20px;
+      color: var(--dark);
       font-size: 1rem;
-      color: #8d6e63;
+      opacity: 0.8;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 25px 20px;
-      }
+    .author {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 8px 20px;
+      border-radius: 30px;
+      background: rgba(44, 110, 73, 0.1);
+    }
 
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
+      
+      .content {
+        padding: 25px;
+      }
+      
+      .verse {
+        font-size: 1.15rem;
+        padding-left: 50px;
+      }
+      
+      .verse-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+      
+      .tab-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+    }
 
-      p {
-        font-size: 1.1rem;
+    @media (max-width: 480px) {
+      .verse {
+        padding-left: 45px;
+      }
+      
+      .verse-number {
+        left: 10px;
+      }
+      
+      .psalm-title {
+        font-size: 1.8rem;
+      }
+      
+      .tab-btn {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Salmo 23</h1>
-    <h2>Bíblia Sagrada</h2>
-
-    <p>O Senhor é o meu pastor, nada me faltará.</p>
-    <p>Ele me faz repousar em pastos verdejantes.</p>
-    <p>Leva-me para junto das águas de descanso;</p>
-    <p>Refrigera a minha alma.</p>
-    <p>Guia-me pelas veredas da justiça por amor do seu nome.</p>
-    <p>Ainda que eu ande pelo vale da sombra da morte, não temerei mal nenhum, porque tu estás comigo;</p>
-    <p>O teu bordão e o teu cajado me consolam.</p>
-    <p>Preparas uma mesa na presença dos meus adversários;</p>
-    <p>Unges a minha cabeça com óleo, o meu cálice transborda.</p>
-    <p>Certamente que a bondade e a misericórdia me seguirão todos os dias da minha vida;</p>
-    <p>E habitarei na casa do Senhor para todo o sempre.</p>
-
-    <iframe src="https://webhookn8n.vml10.xyz/webhook/orbis1" title="Interação Webhook"></iframe>
-
-    <footer>
-      Palavra de fé e esperança • Salmo 23 — Autor da página: R. Azevedo
-    </footer>
+  <div class="header">
+    <div class="logo">
+      <i class="fas fa-bible logo-icon"></i>
+      <h1>Salmos Sagrados</h1>
+    </div>
+    <p class="subtitle">Palavras de fé, esperança e conforto para a sua jornada</p>
   </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="salmo23">
+      <i class="fas fa-verse"></i> Salmo 23
+    </button>
+    <button class="tab-btn" data-tab="salmo121">
+      <i class="fas fa-mountain"></i> Salmo 121
+    </button>
+  </div>
+
+  <div class="content-container">
+    <!-- Salmo 23 -->
+    <div class="content active" id="salmo23-content">
+      <h2 class="psalm-title">Salmo 23</h2>
+      <p class="bible-ref">O Senhor é o meu pastor</p>
+      
+      <div class="verse">
+        <span class="verse-number">1</span>
+        O Senhor é o meu pastor, nada me faltará.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">2</span>
+        Ele me faz repousar em pastos verdejantes. Leva-me para junto das águas de descanso;
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">3</span>
+        Refrigera a minha alma. Guia-me pelas veredas da justiça por amor do seu nome.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">4</span>
+        Ainda que eu ande pelo vale da sombra da morte, não temerei mal nenhum, porque tu estás comigo; o teu bordão e o teu cajado me consolam.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">5</span>
+        Preparas uma mesa na presença dos meus adversários; unges a minha cabeça com óleo, o meu cálice transborda.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">6</span>
+        Certamente que a bondade e a misericórdia me seguirão todos os dias da minha vida; e habitarei na casa do Senhor para todo o sempre.
+      </div>
+      
+      <div class="iframe-container">
+        <iframe src="https://webhookn8n.vml10.xyz/webhook/orbis1" title="Interação Webhook"></iframe>
+      </div>
+    </div>
+    
+    <!-- Salmo 121 -->
+    <div class="content" id="salmo121-content">
+      <h2 class="psalm-title">Salmo 121</h2>
+      <p class="bible-ref">Elevo os meus olhos para os montes</p>
+      
+      <div class="verse">
+        <span class="verse-number">1</span>
+        Elevo os meus olhos para os montes e pergunto: De onde me vem o socorro?
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">2</span>
+        O meu socorro vem do Senhor, que fez os céus e a terra.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">3</span>
+        Ele não permitirá que os teus pés vacilem; não dormitará aquele que te guarda.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">4</span>
+        É certo que não dormita, nem dorme o guarda de Israel.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">5</span>
+        O Senhor é quem te guarda; o Senhor é a tua sombra à tua direita.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">6</span>
+        De dia o sol não te ferirá, nem a lua, de noite.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">7</span>
+        O Senhor te guardará de todo o mal; guardará a tua alma.
+      </div>
+      
+      <div class="verse">
+        <span class="verse-number">8</span>
+        O Senhor guardará a tua saída e a tua entrada, desde agora e para sempre.
+      </div>
+      
+      <div class="iframe-container">
+        <iframe src="https://webhookn8n.vml10.xyz/webhook/orbis1" title="Interação Webhook"></iframe>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>Palavra de fé e esperança para todos os dias</p>
+    <div class="author">
+      <i class="fas fa-user-pen"></i>
+      <span>Autor da página: R. Azevedo</span>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Navegação entre os Salmos
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const contents = document.querySelectorAll('.content');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remover classe ativa de todos os botões e conteúdos
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          contents.forEach(content => content.classList.remove('active'));
+          
+          // Adicionar classe ativa ao botão clicado
+          button.classList.add('active');
+          
+          // Mostrar o conteúdo correspondente
+          const tabId = button.getAttribute('data-tab');
+          document.getElementById(`${tabId}-content`).classList.add('active');
+          
+          // Scroll suave para o topo do conteúdo
+          document.querySelector('.content-container').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        });
+      });
+      
+      // Efeito de destaque nos versículos ao passar o mouse
+      const verses = document.querySelectorAll('.verse');
+      verses.forEach(verse => {
+        verse.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateX(5px)';
+        });
+        
+        verse.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateX(0)';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
